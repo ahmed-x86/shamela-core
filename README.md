@@ -1,3 +1,5 @@
+[english](README.md) | [عربي](README_AR.md)
+
 # Shamela Core
 
 A community-driven wrapper and core enhancement for the Shamela Library software.
