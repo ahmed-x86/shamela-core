@@ -7,6 +7,18 @@ NC='\033[0m' # No Color
 
 echo -e "${BLUE}Starting the installation of Al-Shamela Library on Arch Linux...${NC}"
 
+# Repository URL for downloading missing files
+REPO_URL="https://raw.githubusercontent.com/ahmed-x86/shamela-core/refs/heads/main/"
+
+# Function to download files if they don't exist locally
+download_if_missing() {
+    local file=$1
+    if [ ! -f "$file" ]; then
+        echo -e "${BLUE}$file not found locally. Downloading...${NC}"
+        curl -sO "${REPO_URL}${file}"
+    fi
+}
+
 # 1. Check for libselinux and install via AUR
 install_libselinux() {
     if pacman -Qi libselinux &> /dev/null; then
@@ -51,6 +63,7 @@ rm -rf ./shamela_temp
 
 # 4. Install launch.sh script
 echo -e "${BLUE}Setting up the launch script...${NC}"
+download_if_missing "launch.sh"
 sudo cp launch.sh /opt/shamela/launch.sh
 sudo chmod +x /opt/shamela/launch.sh
 
@@ -59,6 +72,9 @@ sudo ln -sf /opt/shamela/launch.sh /usr/bin/shamela
 
 # 5. Install Desktop entry and Icon
 echo -e "${BLUE}Installing desktop shortcut...${NC}"
+download_if_missing "shamela.png"
+download_if_missing "shamela.desktop"
+
 # Copy the icon to the system icons directory if it exists
 if [ -f "shamela.png" ]; then
     sudo cp shamela.png /usr/share/icons/hicolor/256x256/apps/shamela.png
