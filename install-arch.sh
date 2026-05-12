@@ -3,7 +3,7 @@
 # Colors for formatting
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
-NC='\033[0m' # No Color
+NC='\033[0m' 
 
 echo -e "${BLUE}Starting the installation of Al-Shamela Library on Arch Linux...${NC}"
 
