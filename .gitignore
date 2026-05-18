@@ -1,2 +1,3 @@
 *.tar.xz
 shamela_temp/
+*.pkg.tar.zst
